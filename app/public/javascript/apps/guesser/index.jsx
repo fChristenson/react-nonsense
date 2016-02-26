@@ -1,0 +1,5 @@
+'use strict';
+
+import React from 'react';
+
+export default () => <h1>Guesser</h1>;

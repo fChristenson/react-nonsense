@@ -1,11 +1,14 @@
 'use strict';
 
-var path   = require('path');
-var Hapi   = require('hapi');
-var vision = require('vision');
-var swig   = require('swig');
-var inert  = require('inert');
-var server = new Hapi.Server({
+import { renderToString }       from 'react-dom/server';
+import { RouterContext, match } from 'react-router';
+import path                     from 'path';
+import Hapi                     from 'hapi';
+import vision                   from 'vision';
+import swig                     from 'swig';
+import inert                    from 'inert';
+
+const server   = new Hapi.Server({
   connections: {
     routes: {
       files: {
@@ -17,7 +20,7 @@ var server = new Hapi.Server({
 
 server.connection({port: 3000});
 
-server.register(vision, function(err) {
+server.register(vision, (err) => {
   if(err) throw err;
   server.views({
     engines: {
@@ -28,7 +31,7 @@ server.register(vision, function(err) {
   });
 });
 
-server.register(inert, function(err) {
+server.register(inert, (err) => {
   if(err) throw err;
   server.route({
     method:  'GET',
@@ -46,8 +49,20 @@ server.register(inert, function(err) {
 server.route({
   method:  'GET',
   path:    '/',
-  handler: function(request, reply) {
+  handler: (request, reply) => {
     return reply.view('index');
+  }
+});
+
+server.route({
+  method:  'GET',
+  path:    '/scoreboard',
+  handler: function(request, reply) {
+    Router.match({routes: ['/scoreboard'], location: request.url.path}, function(err, redirectLocation, props) {
+      if(err) throw err;
+      console.log(err, redirectLocation, props);
+      reply('foo');
+    });
   }
 });
 
