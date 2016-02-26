@@ -1,5 +1,6 @@
 'use strict';
 
+import React                    from 'react';
 import { renderToString }       from 'react-dom/server';
 import { RouterContext, match } from 'react-router';
 import path                     from 'path';
@@ -7,6 +8,7 @@ import Hapi                     from 'hapi';
 import vision                   from 'vision';
 import swig                     from 'swig';
 import inert                    from 'inert';
+import routes                   from './public/javascript/apps/index.jsx';
 
 const server   = new Hapi.Server({
   connections: {
@@ -58,10 +60,10 @@ server.route({
   method:  'GET',
   path:    '/scoreboard',
   handler: function(request, reply) {
-    Router.match({routes: ['/scoreboard'], location: request.url.path}, function(err, redirectLocation, props) {
+    match({routes, location: request.url.path}, function(err, redirectLocation, props) {
       if(err) throw err;
       console.log(err, redirectLocation, props);
-      reply('foo');
+      reply(renderToString(<RouterContext {...props}/>));
     });
   }
 });
