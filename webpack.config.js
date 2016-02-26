@@ -8,7 +8,7 @@ module.exports = {
   context: path.join(__dirname, 'app', 'public', 'javascript'),
   entry:   './index.jsx',
   output: {
-    path:     path.join(__dirname, 'dist'),
+    path:     path.join(__dirname, 'app', 'public'),
     filename: 'bundle.js'
   },
   module: {
