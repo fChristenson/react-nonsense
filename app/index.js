@@ -10,7 +10,7 @@ import swig                     from 'swig';
 import inert                    from 'inert';
 import routes                   from './public/javascript/apps/index.jsx';
 
-const server   = new Hapi.Server({
+const server = new Hapi.Server({
   connections: {
     routes: {
       files: {
@@ -22,7 +22,7 @@ const server   = new Hapi.Server({
 
 server.connection({port: 3000});
 
-server.register(vision, (err) => {
+server.register(vision, err => {
   if(err) throw err;
   server.views({
     engines: {
@@ -33,7 +33,7 @@ server.register(vision, (err) => {
   });
 });
 
-server.register(inert, (err) => {
+server.register(inert, err => {
   if(err) throw err;
   server.route({
     method:  'GET',
@@ -56,16 +56,35 @@ server.route({
   }
 });
 
+const reactRoutesHandler = (request, reply) => {
+  match({routes, location: request.url.path}, (err, redirectLocation, props) => {
+    if(err) throw err;
+    reply(renderToString(<RouterContext {...props}/>));
+  });
+};
+
+server.route({
+  method:  'GET',
+  path:    '/talker',
+  handler: reactRoutesHandler
+});
+
+server.route({
+  method:  'GET',
+  path:    '/guesser',
+  handler: reactRoutesHandler
+});
+
+server.route({
+  method:  'GET',
+  path:    '/lobby',
+  handler: reactRoutesHandler
+});
+
 server.route({
   method:  'GET',
   path:    '/scoreboard',
-  handler: function(request, reply) {
-    match({routes, location: request.url.path}, function(err, redirectLocation, props) {
-      if(err) throw err;
-      console.log(err, redirectLocation, props);
-      reply(renderToString(<RouterContext {...props}/>));
-    });
-  }
+  handler: reactRoutesHandler
 });
 
 module.exports = server;

@@ -1,5 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { Link } from 'react-router';
 
-export default () => <h1>Lobby</h1>;
+export default () => <h1><Link to='/'>Lobby</Link></h1>;
+

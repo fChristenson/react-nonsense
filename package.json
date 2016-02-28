@@ -1,7 +1,7 @@
 {
   "name": "nonsense",
   "version": "1.0.0",
-  "description": "",
+  "description": "A guessing game where one player tries to figure out what the other players have on their screen",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/fChristenson/nonses.git"
   },
-  "author": "",
+  "author": "Fredrik Christenson",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/fChristenson/nonses/issues"
@@ -35,7 +35,6 @@
   },
   "dependencies": {
     "babel-cli": "^6.5.1",
-    "babel-core": "^6.5.2",
     "hapi": "^13.0.0",
     "immutable": "^3.7.6",
     "inert": "^3.2.0",
