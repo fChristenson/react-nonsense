@@ -5,7 +5,10 @@
     <title>Nonsense</title>
 </head>
 <body>
-    <div id="app"></div>
+  <div id="app">{% autoescape false %}{{html}}{% endautoescape %}</div>
+    <script>
+    window.__INITIAL_STATE__ = {{JSON.stringify(init)}};
+    </script>
     <script type="text/javascript" src="/bundle.js"></script>
 </body>
 </html>

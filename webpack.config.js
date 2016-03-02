@@ -11,6 +11,9 @@ module.exports = {
     path:     path.join(__dirname, 'app', 'public'),
     filename: 'bundle.js'
   },
+  devServer: {
+    contentBase: './app/views/'
+  },
   module: {
     loaders: [
       {

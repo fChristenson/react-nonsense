@@ -1,6 +1,14 @@
 'use strict';
 
-import React from 'react';
-import { Link } from 'react-router';
+import React  from 'react';
+import Button from '../../components/button/index.jsx';
+import Header from '../../components/header/index.jsx';
 
-export default () => <h1><Link to="scoreboard">Startscreen</Link></h1>;
+export default (props) => {
+  return (<Header textTop={'Nonsense'}>
+        <div className="startscreen">
+          <Button text={'Invite to game'} onClick={props.inviteToGame}/>
+          <Button text={'Join game'} onClick={props.joinGame}/>
+        </div>
+      </Header>);
+};

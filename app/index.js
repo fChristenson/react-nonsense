@@ -2,13 +2,16 @@
 
 import React                    from 'react';
 import { renderToString }       from 'react-dom/server';
-import { RouterContext, match } from 'react-router';
+import { RouterContext, match } from 'react-router/lib';
+import { createStore }          from 'redux';
+import { Provider }             from 'react-redux';
 import path                     from 'path';
 import Hapi                     from 'hapi';
 import vision                   from 'vision';
 import swig                     from 'swig';
 import inert                    from 'inert';
 import routes                   from './public/javascript/apps/index.jsx';
+import reducers                 from './public/javascript/reducers';
 
 const server = new Hapi.Server({
   connections: {
@@ -59,9 +62,18 @@ server.route({
 const reactRoutesHandler = (request, reply) => {
   match({routes, location: request.url.path}, (err, redirectLocation, props) => {
     if(err) throw err;
-    reply(renderToString(<RouterContext {...props}/>));
+    const store     = createStore(reducers);
+    const initState = store.getState();
+    const html      = renderToString(<Provider store={store}><RouterContext {...props}/></Provider>);
+    reply.view('index', {html: html, init: initState});
   });
 };
+
+server.route({
+  method:  'GET',
+  path:    '/join',
+  handler: reactRoutesHandler
+});
 
 server.route({
   method:  'GET',
@@ -78,6 +90,30 @@ server.route({
 server.route({
   method:  'GET',
   path:    '/lobby',
+  handler: reactRoutesHandler
+});
+
+server.route({
+  method:  'GET',
+  path:    '/invite',
+  handler: reactRoutesHandler
+});
+
+server.route({
+  method:  'GET',
+  path:    '/correct',
+  handler: reactRoutesHandler
+});
+
+server.route({
+  method:  'GET',
+  path:    '/incorrect',
+  handler: reactRoutesHandler
+});
+
+server.route({
+  method:  'GET',
+  path:    '/result',
   handler: reactRoutesHandler
 });
 
