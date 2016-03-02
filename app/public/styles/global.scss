@@ -3,3 +3,32 @@
   padding:    0;
   box-sizing: border-box;
 }
+
+body {
+  background:  #7085C4;
+  color:       #fff;
+  font-family: Arial black, Sans-serif;
+}
+
+h1 {
+  font-size:      20px;
+  letter-spacing: 1px;
+  text-align:     center;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size:      18px;
+  letter-spacing: 1px;
+  text-align:     center;
+  text-transform: uppercase;
+}
+
+button {
+  border: none;
+}
+
+.content {
+  max-width: 1170px;
+  padding:   15px;
+}

@@ -1,14 +1,13 @@
 'use strict';
 
 import React  from 'react';
+import styles from './startscreen.scss';
 import Button from '../../components/button/index.jsx';
-import Header from '../../components/header/index.jsx';
 
 export default (props) => {
-  return (<Header textTop={'Nonsense'}>
-        <div className="startscreen">
-          <Button text={'Invite to game'} onClick={props.inviteToGame}/>
-          <Button text={'Join game'} onClick={props.joinGame}/>
-        </div>
-      </Header>);
+  return (<div className="startscreen">
+      <h1 className="startscreen__header">Nonsense</h1>
+      <Button text={'Invite to game'} onClick={props.inviteToGame}/>
+      <Button text={'Join game'} onClick={props.joinGame}/>
+      </div>);
 };

@@ -16,21 +16,21 @@ module.exports = {
   },
   module: {
     loaders: [
-      {
-        test:    /\.jsx?$/,
-        exclude: /node_modules/,
-        loader:  'babel',
-        query: {
+    {
+      test:    /\.jsx?$/,
+      exclude: /node_modules/,
+      loader:  'babel',
+      query: {
 
-          presets: ['react', 'es2015']
+        presets: ['react', 'es2015']
 
-        }
-      },
-      {
-        test:    /\.scss$/,
-        exclude: /node_modules/,
-        loader:  'style!css!postcss'
       }
+    },
+    {
+      test:    /\.scss$/,
+      exclude: /node_modules/,
+      loader:  'style!css!postcss'
+    }
     ]
   },
   postcss: function () {
