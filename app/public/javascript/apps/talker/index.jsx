@@ -4,7 +4,6 @@ import React       from 'react';
 import Avatar      from '../../components/avatar/index.jsx';
 import LetterTable from '../../components/letterTable/index.jsx';
 import TalkInput   from '../../components/talkInput/index.jsx';
-import styles      from './talker.scss';
 
 export default (props) => {
    const panel = <div>

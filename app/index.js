@@ -51,14 +51,6 @@ server.register(inert, err => {
   });
 });
 
-server.route({
-  method:  'GET',
-  path:    '/',
-  handler: (request, reply) => {
-    return reply.view('index');
-  }
-});
-
 const reactRoutesHandler = (request, reply) => {
   match({routes, location: request.url.path}, (err, redirectLocation, props) => {
     if(err) throw err;
@@ -68,6 +60,12 @@ const reactRoutesHandler = (request, reply) => {
     reply.view('index', {html: html, init: initState});
   });
 };
+
+server.route({
+  method:  'GET',
+  path:    '/',
+  handler: reactRoutesHandler
+});
 
 server.route({
   method:  'GET',

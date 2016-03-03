@@ -1,7 +1,6 @@
 'use strict';
 
 import React  from 'react';
-import styles from './talkInput.scss';
 
 export default (props) => {
   var letters = props.letters.map(function(letter, index) {

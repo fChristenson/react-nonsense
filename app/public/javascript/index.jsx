@@ -1,6 +1,6 @@
 'use strict';
 
-import styles                            from'../styles/global.scss';
+import styles                            from '../styles/index.js';
 import React                             from 'react';
 import ReactDOM                          from 'react-dom';
 import routes                            from './apps/index.jsx'

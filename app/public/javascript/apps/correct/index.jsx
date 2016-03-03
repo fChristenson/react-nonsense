@@ -3,7 +3,6 @@
 import React  from 'react';
 import Avatar from '../../components/avatar/index.jsx';
 import Button from '../../components/button/index.jsx';
-import styles from './correct.scss';
 
 export default (props) => {
   return (<div className="correct">

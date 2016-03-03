@@ -1,7 +1,6 @@
 'use strict';
 
 import React  from 'react';
-import styles from './avatar.scss';
 
 export default (props) => {
   return (<div className="avatar">

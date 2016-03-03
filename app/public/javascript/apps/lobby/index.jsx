@@ -3,7 +3,6 @@
 import React   from 'react';
 import Avatar  from '../../components/avatar/index.jsx';
 import Spinner from '../../components/spinner/index.jsx';
-import style   from './lobby.scss';
 
 export default (props) => {
   return (<div className="lobby">

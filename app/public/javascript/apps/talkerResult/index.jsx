@@ -2,7 +2,6 @@
 
 import React  from 'react';
 import Avatar from '../../components/avatar/index.jsx';
-import styles from './talkerResult.scss';
 
 export default (props) => {
   return (<div className="talkerresult">

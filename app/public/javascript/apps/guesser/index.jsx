@@ -3,7 +3,6 @@
 import React     from 'react';
 import Avatar    from '../../components/avatar/index.jsx';
 import TalkInput from '../../components/talkInput/index.jsx';
-import style     from './guesser.scss';
 
 export default (props) => {
   var guessingImages = props.images.map(function(image, index) {

@@ -1,7 +1,6 @@
 'use strict';
 
 import React  from 'react';
-import styles from './letterTable.scss';
 
 const onClick = (letter, props) => {
   return () => props.onClick(letter)

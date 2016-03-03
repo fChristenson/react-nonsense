@@ -2,7 +2,6 @@
 
 import React  from 'react';
 import Button from '../../components/button/index.jsx';
-import styles from './join.scss';
 
 const onChange = (props) => {
   return (event) => {

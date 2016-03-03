@@ -2,7 +2,6 @@
 
 import React  from 'react';
 import Button from '../../components/button/index.jsx';
-import styles from './invite.scss';
 
 export default (props) => {
   return ( <div className="invite">

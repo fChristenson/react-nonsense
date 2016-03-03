@@ -3,7 +3,6 @@
 import React  from 'react';
 import Avatar from '../../components/avatar/index.jsx';
 import Button from '../../components/button/index.jsx';
-import style  from './scoreboard.scss';
 
 export default (props) => {
   const rows = props.scores.map((score, index) => {

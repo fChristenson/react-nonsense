@@ -12,6 +12,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
+    historyApiFallback: true,
     contentBase: './app/views/'
   },
   module: {
@@ -21,9 +22,7 @@ module.exports = {
       exclude: /node_modules/,
       loader:  'babel',
       query: {
-
         presets: ['react', 'es2015']
-
       }
     },
     {
