@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
   return {
-    inviteCode: state.join.inviteCode
+    code: state.join.code
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     lobby: () => dispatch({type: 'LOBBY'}),
-    setInviteCode: (inviteCode) => dispatch({type: 'SET_INVITE_CODE', inviteCode: inviteCode})
+    setCode: (code) => dispatch({type: 'SET_INPUT_CODE', code: code})
   };
 };
 

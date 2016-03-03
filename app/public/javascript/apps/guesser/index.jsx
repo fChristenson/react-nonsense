@@ -12,8 +12,10 @@ export default (props) => {
   });
   return (<div className="guesser">
       <Avatar player={props.player} score={props.score}/>
-      <h1 className="guesser__headertop">Select the</h1>
-      <h1 className="guesser__headerbottom">correct image</h1>
+      <h1>
+        <div className="guesser__headertop">Select the</div>
+        <div className="guesser__headerbottom">correct image</div>
+      </h1>
       <div className="guesser__imagecontainer">
       {guessingImages}
       </div>

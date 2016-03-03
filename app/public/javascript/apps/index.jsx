@@ -17,13 +17,14 @@ const App = props => <div className='content'>{props.children}</div>;
 
 const Routes = <Route path="/" component={App}>
 <IndexRoute component={Startscreen}/>
-<Route path="result" component={Incorrect}/>
 <Route path="incorrect" component={Incorrect}/>
 <Route path="correct" component={Correct}/>
 <Route path="invite" component={Invite}/>
 <Route path="join" component={Join}/>
 <Route path="lobby" component={Lobby}/>
-<Route path="talker" component={Talker}/>
+<Route path="talker" component={Talker}>
+  <Route path="result" component={TalkerResult}/>
+</Route>
 <Route path="guesser" component={Guesser}/>
 <Route path="scoreboard" component={Scoreboard}/>
 </Route>;
