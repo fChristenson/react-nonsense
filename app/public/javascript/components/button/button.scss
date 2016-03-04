@@ -8,4 +8,12 @@
   text-transform: uppercase;
   font-size:      15px;
   font-weight:    bolder;
+  
+  &:hover {
+    cursor: pointer;
+  }
+
+  @mixin mediumlargescreen {
+    max-width: 300px;
+  }
 }

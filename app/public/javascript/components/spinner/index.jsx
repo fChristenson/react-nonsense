@@ -2,4 +2,4 @@
 
 import React from 'react';
 
-export default () => <h1>Spinner</h1>;
+export default () => <div className="loader"></div>;

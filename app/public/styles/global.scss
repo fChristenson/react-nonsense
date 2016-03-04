@@ -29,6 +29,13 @@ button {
 }
 
 .content {
+  margin:    0 auto;
   max-width: 1170px;
   padding:   15px;
+}
+
+@define-mixin mediumlargescreen {
+  @media all and (min-device-width: 768px) {
+    @mixin-content
+  }
 }

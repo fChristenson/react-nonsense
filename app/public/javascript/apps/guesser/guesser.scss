@@ -3,6 +3,10 @@
   display:         flex;
   align-items:     center;
   justify-content: space-around;
+
+  @mixin mediumlargescreen {
+    justify-content: center;
+  }
 }
 
 .guesser__headertop {
@@ -11,5 +15,14 @@
 
 .guesser__image {
   width: 80px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @mixin mediumlargescreen {
+    width:  160px;
+    margin: 10px;
+  }
 }
 

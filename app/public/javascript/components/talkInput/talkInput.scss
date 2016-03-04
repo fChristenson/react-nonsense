@@ -5,7 +5,12 @@
   color:          black;
   background:     #fff;
   padding:        15px;
+  margin:         0 auto;
   text-align:     center;
   text-transform: uppercase;
   letter-spacing: 1px;
+
+  @mixin mediumlargescreen {
+    max-width: 520px;
+  }
 }
