@@ -25,9 +25,6 @@ const gameState = {
 
 const game = (state = gameState, action) => {
   switch (action.type) {
-    case 'UPDATE_STATE':
-      delete action.state.game.player;
-      return Object.assign({}, state, action.state);
     case 'SET_PLAYER':
       return Object.assign({}, state, {player: action.player});
     case 'SET_GUESSER':

@@ -9,6 +9,10 @@ const hasLetter = (letters, id) => {
 export default socket => store => next => action => {
   console.log('action sent', store.getState(), action);
   switch(action.type) {
+    case 'CORRECT_CHOICE':
+    case 'INCORRECT_CHOICE':
+      socket.emit('GUESS_WAS_MADE', {type: 'GUESS_WAS_MADE', selectedImage: action.selectedImage});
+      return next(action);
     case 'REMOTE_SCOREBOARD':
       return agent.get('/score')
         .then(res => {

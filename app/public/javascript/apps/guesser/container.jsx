@@ -13,8 +13,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    incorrectChoice: () => dispatch({type: 'INCORRECT_CHOICE'}),
-    correctChoice: () => dispatch({type: 'CORRECT_CHOICE'})
+    incorrectChoice: (selectedImage) => dispatch({type: 'INCORRECT_CHOICE', selectedImage}),
+    correctChoice: (selectedImage) => dispatch({type: 'CORRECT_CHOICE', selectedImage })
   };
 };
 

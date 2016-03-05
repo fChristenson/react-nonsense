@@ -16,6 +16,7 @@ const init      = window.__INITIAL_STATE__;
 const makeStore = applyMiddleware(middlewares(socket))(createStore);
 const store     = makeStore(reducers, init);
 
+socket.on('GUESS_WAS_MADE', action => store.dispatch(action));
 socket.on('REMOTE_SCOREBOARD', action => store.dispatch(action));
 socket.on('REMOTE_ADD_LETTER', action => store.dispatch(action));
 socket.on('START_TALKING', action => store.dispatch(action));

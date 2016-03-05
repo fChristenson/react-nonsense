@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => {
       type: 'ADD_LETTER', 
       letter: {
         id: Math.random(),
-        player: player,
+        player,
         letter 
       }})
   };

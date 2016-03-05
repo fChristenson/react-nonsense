@@ -20,14 +20,18 @@ const store = createStore(reducers);
 const io    = new IoServer().attach(3001);
 
 io.on('connect', (socket) => {
-  socket.on('SCOREBOARD', (action) => {
+  socket.on('SCOREBOARD', action => {
     action.type = 'REMOTE_SCOREBOARD';
     socket.broadcast.emit('REMOTE_SCOREBOARD', action);
   });
-  socket.on('START_GAME', () => {
-    socket.broadcast.emit('START_TALKING', {type: 'START_TALKING'});
+  socket.on('GUESS_WAS_MADE', action => {
+    socket.broadcast.emit('GUESS_WAS_MADE', action);
   });
-  socket.on('ADD_LETTER', (action) => {
+  socket.on('START_GAME', action => {
+    action.type = 'START_TALKING';
+    socket.broadcast.emit('START_TALKING', action);
+  });
+  socket.on('ADD_LETTER', action => {
     store.dispatch(action);
     action.type = 'REMOTE_ADD_LETTER';
     socket.broadcast.emit('REMOTE_ADD_LETTER', action);
