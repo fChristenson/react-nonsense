@@ -5,15 +5,9 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
   return {
-    player: state.lobby.player
+    player: state.game.player.name
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    startTalking: () => dispatch({type: 'START_TALKING'})
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Lobby);
+export default connect(mapStateToProps)(Lobby);
 

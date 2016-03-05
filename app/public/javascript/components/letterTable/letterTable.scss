@@ -2,15 +2,20 @@
   margin:     10px auto;
   width:      100%;
   text-align: center;
+
+  @mixin mediumlargescreen {
+    max-width: 520px;
+  }
 }
 
 .lettertable__button {
-  color:         #fff;
-  background:    none;
-  font-size:     32px;
-  font-weight:   bolder;
-  outline-color: #fff;
-  padding:       0 5px;
+  color:          #fff;
+  background:     none;
+  font-size:      32px;
+  font-weight:    bolder;
+  outline-color:  #fff;
+  padding:        0 5px;
+  text-transform: uppercase;
   
   &:hover {
     cursor: pointer;

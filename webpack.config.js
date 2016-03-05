@@ -7,6 +7,7 @@ var path         = require('path');
 module.exports = {
   context: path.join(__dirname, 'app', 'public', 'javascript'),
   entry:   './index.jsx',
+  devtool: 'eval-source-map',
   output: {
     path:     path.join(__dirname, 'app', 'public'),
     filename: 'bundle.js'

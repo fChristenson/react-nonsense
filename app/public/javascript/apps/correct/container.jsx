@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    player: state.correct.player,
-    score: state.correct.score
+    player: state.game.player.name,
+    score: state.game.player.score
   };
 };
 

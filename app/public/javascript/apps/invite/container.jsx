@@ -4,7 +4,7 @@ import Invite      from './index.jsx';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
-  return {inviteCode: state.invite.inviteCode};
+  return {inviteCode: state.game.inviteCode};
 };
 
 const mapDispatchToProps = dispatch => {

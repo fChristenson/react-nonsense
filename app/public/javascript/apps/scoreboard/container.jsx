@@ -4,8 +4,8 @@ import Scoreboard  from './index.jsx';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
-  return {
-    scores: state.scoreboard.scores
+ return {
+   scores: state.game.scores 
   };
 };
 

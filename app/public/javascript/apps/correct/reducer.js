@@ -2,13 +2,9 @@
 
 import { browserHistory } from 'react-router/lib';
 
-const correctState = {
-  player: 'P1',
-  score: 0
-};
-
-export default (state = correctState, action) => {
+export default (state = {}, action) => {
   switch(action.type) {
+    case 'REMOTE_SCOREBOARD':
     case 'SCOREBOARD':
       browserHistory.push('/scoreboard');
       return state;

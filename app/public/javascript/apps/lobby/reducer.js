@@ -2,11 +2,7 @@
 
 import { browserHistory } from 'react-router/lib';
 
-const lobbyState = {
-  player: 'P1'
-};
-
-export default (state = lobbyState, action) => {
+export default (state = {}, action) => {
   switch(action.type) {
     case 'START_TALKING':
       browserHistory.push('/talker');

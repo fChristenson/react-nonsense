@@ -5,17 +5,22 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    player: state.talker.player,
-    score: state.talker.score,
+    player: state.game.player,
     image: state.talker.image,
-    letters: state.talker.letters,
+    letters: state.game.letters,
     randomLetters: state.talker.randomLetters
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addLetter: letter => dispatch({type: 'ADD_LETTER', letter: letter})
+    addLetter: (player, letter) => dispatch({
+      type: 'ADD_LETTER', 
+      letter: {
+        id: Math.random(),
+        player: player,
+        letter 
+      }})
   };
 };
 
