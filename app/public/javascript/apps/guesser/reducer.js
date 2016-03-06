@@ -2,19 +2,18 @@
 
 import { browserHistory } from 'react-router/lib';
 
-const defaultImage = 'http://placehold.it/100x100';
 const guesserState = {
   images: [
   {
-    src: defaultImage,
+    src: '/images/dog.jpeg',
     isValid: false
   },
   {
-    src: defaultImage,
+    src: '/images/hamburger.jpeg',
     isValid: true
   },
   {
-    src: defaultImage,
+    src: '/images/horse.jpeg',
     isValid: false
   }
   ]

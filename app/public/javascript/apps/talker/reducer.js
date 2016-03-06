@@ -1,7 +1,7 @@
 'use strict';
 
 const talkerState = {
-  image:'http://www.placehold.it/100x100',
+  image:'/images/dog.jpeg',
   randomLetters: ['z', 'h', 'u', 'd', 'a', 'q', 'f', 'n', 'p', 'r', 'c', 'v']
 };
 
