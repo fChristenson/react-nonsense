@@ -13,19 +13,33 @@ import swig                     from 'swig';
 import inert                    from 'inert';
 import routes                   from './public/javascript/apps/index.jsx';
 import reducers                 from './public/javascript/reducers';
+import U                        from './util';
 
-const store = createStore(reducers);
-
+let store       = createStore(reducers);
+const initState = store.getState();
 // socket io server
 const io    = new IoServer().attach(3001);
 
 io.on('connect', (socket) => {
+  socket.on('REWARD_GUESSER_POINTS', action => {
+    store.dispatch(action);
+  });
   socket.on('SCOREBOARD', action => {
     action.type = 'REMOTE_SCOREBOARD';
     socket.broadcast.emit('REMOTE_SCOREBOARD', action);
   });
   socket.on('GUESS_WAS_MADE', action => {
+    if (action.guessWasCorrect) {
+      const talkerAction = {type: 'REWARD_TALKER_POINTS', points: 5};
+      store.dispatch(talkerAction);
+      socket.broadcast.emit('REWARD_TALKER_POINTS', talkerAction);
+    }
     socket.broadcast.emit('GUESS_WAS_MADE', action);
+  });
+  socket.on('END_GAME', action => {
+    action.type = 'REMOTE_END_GAME';
+    store.dispatch(action);
+    socket.broadcast.emit('REMOTE_END_GAME', action);
   });
   socket.on('START_GAME', action => {
     action.type = 'START_TALKING';
@@ -80,7 +94,6 @@ server.register(inert, err => {
 const reactRoutesHandler = (request, reply) => {
   match({routes, location: request.url.path}, (err, redirectLocation, props) => {
     if(err) throw err;
-    const initState = store.getState();
     const html      = renderToString(<Provider store={store}><RouterContext {...props}/></Provider>);
     reply.view('index', {html: html, init: initState});
   });
@@ -101,7 +114,8 @@ server.route({
     const guesser     = {
       id,
       name: 'P1',
-      score: 0
+      score: 0,
+      color: U.randomHexColor()
     };
     store.dispatch({type: 'SET_GUESSER', guesser});
     reply({state, guesser});
@@ -134,7 +148,8 @@ server.route({
     const talker      = {
       id,
       name: 'P' + playerCount,
-      score: 0
+      score: 0,
+      color: U.randomHexColor()
     };
     store.dispatch({type: 'ADD_TALKER', talker});
     reply({state, talker});

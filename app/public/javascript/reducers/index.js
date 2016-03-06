@@ -11,6 +11,7 @@ import talkerResult                      from '../apps/talkerResult/reducer.js';
 import join                              from '../apps/join/reducer.js';
 import lobby                             from '../apps/lobby/reducer.js';
 import talker                            from '../apps/talker/reducer.js';
+import U                                 from '../../../util';
 
 const gameState = {
   isStarted: false,
@@ -24,7 +25,21 @@ const gameState = {
 };
 
 const game = (state = gameState, action) => {
+  let player;
   switch (action.type) {
+    case 'END_GAME':
+    case 'REMOTE_END_GAME':
+      const scores   = state.scores;
+      const tmpState = Object.assign({}, gameState);
+      return Object.assign({}, tmpState, {scores});
+    case 'REWARD_TALKER_POINTS':
+      const talkers = U.addTalkerPoints(action.points, state.talkers, state.letters);
+      player        = state.talkers.filter(U.isPlayer(state.player))[0];
+      return Object.assign({}, state, {talkers, player});
+    case 'REWARD_GUESSER_POINTS':
+      const guesser = U.addGuesserPoints(action.points, state.guesser);
+      player        = U.addGuesserPoints(action.points, state.guesser);
+      return Object.assign({}, state, {guesser, player});
     case 'SET_PLAYER':
       return Object.assign({}, state, {player: action.player});
     case 'SET_GUESSER':

@@ -13,6 +13,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    rewardPoints: () => dispatch({type: 'REWARD_GUESSER_POINTS', points: 10}),
     incorrectChoice: (selectedImage) => dispatch({type: 'INCORRECT_CHOICE', selectedImage}),
     correctChoice: (selectedImage) => dispatch({type: 'CORRECT_CHOICE', selectedImage })
   };

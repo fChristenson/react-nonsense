@@ -14,8 +14,10 @@ import middlewares                       from './middlewares';
 const socket    = io('http://localhost:3001');
 const init      = window.__INITIAL_STATE__;
 const makeStore = applyMiddleware(middlewares(socket))(createStore);
-const store     = makeStore(reducers, init);
+let   store     = makeStore(reducers, init);
 
+socket.on('REMOTE_END_GAME', action => store.dispatch(action));
+socket.on('REWARD_TALKER_POINTS', action => store.dispatch(action));
 socket.on('GUESS_WAS_MADE', action => store.dispatch(action));
 socket.on('REMOTE_SCOREBOARD', action => store.dispatch(action));
 socket.on('REMOTE_ADD_LETTER', action => store.dispatch(action));

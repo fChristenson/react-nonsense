@@ -11,7 +11,7 @@ export default (props) => {
     <LetterTable onClick={props.addLetter} player={props.player} letters={props.randomLetters}/>
   </div>;
   return (<div className="talker">
-      <Avatar player={props.player.name} score={props.player.score}/>
+      <Avatar player={props.player.name} score={props.player.score} color={props.player.color}/>
       <h1 className="talker__header">
           <div>User the letters</div>
           <div>to describe the image</div>

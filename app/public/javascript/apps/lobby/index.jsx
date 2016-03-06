@@ -6,7 +6,7 @@ import Spinner from '../../components/spinner/index.jsx';
 
 export default (props) => {
   return (<div className="lobby">
-      <Avatar player={props.player}/>
+      <Avatar player={props.player.name} color={props.player.color}/>
       <h1 className="lobby__header">
           <div>Waiting for game</div>
           <div>to start</div>
