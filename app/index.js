@@ -36,14 +36,28 @@ io.on('connect', (socket) => {
     }
     socket.broadcast.emit('GUESS_WAS_MADE', action);
   });
-  socket.on('END_GAME', action => {
+  socket.on('GUESSER_NEXT_ROUND', action => {
+   store.dispatch({type: 'SHUFFLE_IMAGES'});
+    const state        = store.getState();
+    const images       = state.game.images;
+    const correctImage = state.game.correctImage;
+    io.sockets.emit('SET_IMAGES', {type: 'SET_IMAGES', images, correctImage});
+    action.type        = 'TALKER_NEXT_ROUND';
+    socket.broadcast.emit('TALKER_NEXT_ROUND', action);
+  });
+   socket.on('END_GAME', action => {
     action.type = 'REMOTE_END_GAME';
     store.dispatch(action);
     socket.broadcast.emit('REMOTE_END_GAME', action);
   });
   socket.on('START_GAME', action => {
-    action.type = 'START_TALKING';
+    store.dispatch({type: 'SHUFFLE_IMAGES'});
+    const state        = store.getState();
+    const images       = state.game.images;
+    const correctImage = state.game.correctImage;
+    action.type        = 'START_TALKING';
     socket.broadcast.emit('START_TALKING', action);
+    io.sockets.emit('SET_IMAGES', {type: 'SET_IMAGES', images, correctImage});
   });
   socket.on('ADD_LETTER', action => {
     store.dispatch(action);

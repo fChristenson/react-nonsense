@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    images: state.guesser.images,
+    images: state.game.images,
     letters: state.game.letters,
     player: state.game.player
   };

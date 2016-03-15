@@ -10,6 +10,9 @@ const hasLetter = (letters, id) => {
 export default socket => store => next => action => {
   console.log('action sent', store.getState(), action);
   switch(action.type) {
+    case 'GUESSER_NEXT_ROUND':
+      socket.emit('GUESSER_NEXT_ROUND', action);
+      return next(action);
     case 'END_GAME':
       socket.emit('END_GAME', {type: 'END_GAME'});
       return next(action);

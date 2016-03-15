@@ -16,6 +16,8 @@ const init      = window.__INITIAL_STATE__;
 const makeStore = applyMiddleware(middlewares(socket))(createStore);
 let   store     = makeStore(reducers, init);
 
+socket.on('TALKER_NEXT_ROUND', action => store.dispatch(action));
+socket.on('SET_IMAGES', action => store.dispatch(action));
 socket.on('REMOTE_END_GAME', action => store.dispatch(action));
 socket.on('REWARD_TALKER_POINTS', action => store.dispatch(action));
 socket.on('GUESS_WAS_MADE', action => store.dispatch(action));

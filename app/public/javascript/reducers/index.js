@@ -15,18 +15,52 @@ import U                                 from '../../../util';
 
 const gameState = {
   isStarted: false,
+  round: 1,
   inviteCode: undefined,
   guesser: {},
   talkers: [],
   player: {},
   letters: [],
   guessWasCorrect: undefined,
-  scores: []
+  scores: [],
+  images: [
+  {
+    src: '/images/dog.jpeg',
+    isValid: false
+  },
+  {
+    src: '/images/hamburger.jpeg',
+    isValid: true
+  },
+  {
+    src: '/images/horse.jpeg',
+    isValid: false
+  }
+  ],
+  correctImage: '/images/hamburger.jpeg'
 };
 
 const game = (state = gameState, action) => {
   let player;
+  let correctImage;
+  let images;
+  let letters;
   switch (action.type) {
+    case 'TALKER_NEXT_ROUND':
+      letters = [];
+      return Object.assign({}, state, {letters});
+    case 'GUESSER_NEXT_ROUND':
+      const round   = state.round + 1;
+      letters = [];
+      return Object.assign({}, state, {round, letters});
+    case 'SET_IMAGES':
+      images       = action.images;
+      correctImage = action.correctImage;
+      return Object.assign({}, state, {images, correctImage});
+    case 'SHUFFLE_IMAGES':
+      images       = U.shuffleImages(state.images);
+      correctImage = images.filter(image => image.isValid)[0].src;
+      return Object.assign({}, state, {images, correctImage});
     case 'END_GAME':
     case 'REMOTE_END_GAME':
       const scores   = state.scores;

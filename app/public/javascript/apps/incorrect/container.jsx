@@ -5,13 +5,21 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    player: state.game.player
+    player: state.game.player,
+    round: state.game.round
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    scoreboard: () => dispatch({type: 'SCOREBOARD'})
+    scoreboard: (round) => {
+      if(round >= 3) {
+        dispatch({type: 'SCOREBOARD'});
+      }
+      else {
+        dispatch({type: 'GUESSER_NEXT_ROUND'});
+      }
+    }
   };
 };
 

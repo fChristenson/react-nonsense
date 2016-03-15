@@ -1,6 +1,12 @@
 'use strict';
 
 import R from 'ramda';
+//_->String []
+const randomLetters = () => {
+  const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  return shuffle(letters);
+};
+module.exports.randomLetters = randomLetters;
 //_->String
 const randomHexColor = () => '#'+(Math.random()*0xFFFFFF<<0).toString(16)
 module.exports.randomHexColor = randomHexColor;
@@ -10,15 +16,27 @@ const shuffle = array => {
   let i;
   let j;
   let tmp;
-  for (i = array.length; i > 0; i--) {
+  for (i = result.length; i > 0; i--) {
     j = Math.floor(Math.random() * i);
-    tmp          = array[i - 1]; 
-    array[i - 1] = array[j];
-    array[j]     = tmp;
+    tmp           = result[i - 1]; 
+    result[i - 1] = result[j];
+    result[j]     = tmp;
   }
   return result;
 };
 module.exports.shuffle = shuffle;
+// Image []->Image []
+const shuffleImages = array => {
+  const clone       = R.clone(array);
+  const resetArray  = clone.map(image => {
+    image.isValid   = false;
+    return image;
+  }); 
+  const result      = shuffle(resetArray);
+  result[0].isValid = true;
+  return result;
+};
+module.exports.shuffleImages = shuffleImages;
 // Number->Guesser {}->Guesser {}
 const addGuesserPoints = R.curry((points, guesser) => {
   const newScore = R.add(guesser.score, points);
@@ -47,4 +65,4 @@ const addTalkerPoints = R.curry((points, talkers, letters) => {
 module.exports.addTalkerPoints = addTalkerPoints;
 // Player {}->{}->Boolean
 const isPlayer = R.curry((player, obj) => player.id === obj.id)
-module.exports.isPlayer = isPlayer;
+  module.exports.isPlayer = isPlayer;

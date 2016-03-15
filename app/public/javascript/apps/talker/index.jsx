@@ -13,7 +13,7 @@ export default (props) => {
   return (<div className="talker">
       <Avatar player={props.player.name} score={props.player.score} color={props.player.color}/>
       <h1 className="talker__header">
-          <div>User the letters</div>
+          <div>Use the letters</div>
           <div>to describe the image</div>
       </h1>
       <img className="talker__image" src={props.image}/>
