@@ -1,5 +1,5 @@
 {
-  "name": "nonsense",
+  "name": "react-nonsense",
   "version": "1.0.0",
   "description": "A guessing game where one player tries to figure out what the other players have on their screen",
   "main": "server.js",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fChristenson/nonses.git"
+    "url": "git+https://github.com/fChristenson/react-nonsense.git"
   },
   "author": "Fredrik Christenson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fChristenson/nonses/issues"
+    "url": "https://github.com/fChristenson/react-nonsense/issues"
   },
-  "homepage": "https://github.com/fChristenson/nonses#readme",
+  "homepage": "https://github.com/fChristenson/react-nonsense#readme",
   "devDependencies": {
     "autoprefixer": "^6.3.3",
     "babel-core": "^6.5.2",
@@ -40,7 +40,6 @@
   "dependencies": {
     "babel-cli": "^6.5.1",
     "hapi": "^13.0.0",
-    "immutable": "^3.7.6",
     "inert": "^3.2.0",
     "joi": "^8.0.4",
     "ramda": "^0.19.1",
