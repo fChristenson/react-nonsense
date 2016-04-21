@@ -6,14 +6,14 @@ import TalkInput from '../../components/talkInput/index.jsx';
 import R         from 'ramda';
 import U         from '../../../../util';
 
-const onClick = (image, fn) => () => fn(image)
+const onClick = (image, props, fn) => () => fn(image, props.code)
 
   export default (props) => {
     const shuffle = U.shuffle(props.images);
     const guessingImages = shuffle.map((image, index) => {
-      const correct    = R.compose(props.rewardPoints, props.correctChoice);
+      const correct    = R.compose(props.rewardPoints, R.prop('code'), props.correctChoice);
       const makeChoice = image.isValid ? correct : props.incorrectChoice;
-      return <button className="guesser__button" key={index} onClick={onClick(image.src, makeChoice)}>
+      return <button className="guesser__button" key={index} onClick={onClick(image.src, props, makeChoice)}>
         <img className="guesser__image" src={image.src}/>
         </button>;
     });

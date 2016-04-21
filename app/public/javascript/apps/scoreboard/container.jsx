@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
  return {
-   scores: state.game.scores 
+   scores: state.game.scores,
+   code: state.game.inviteCode
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    endGame: () => dispatch({type: 'END_GAME'})
+    endGame: (code) => dispatch({type: 'END_GAME', code})
   };
 };
 

@@ -46,6 +46,8 @@ const game = (state = gameState, action) => {
   let images;
   let letters;
   switch (action.type) {
+    case 'INVITE_TO_GAME':
+      return Object.assign({}, state, {inviteCode: action.code});
     case 'TALKER_NEXT_ROUND':
       letters = [];
       return Object.assign({}, state, {letters});
@@ -63,9 +65,8 @@ const game = (state = gameState, action) => {
       return Object.assign({}, state, {images, correctImage});
     case 'END_GAME':
     case 'REMOTE_END_GAME':
-      const scores   = state.scores;
       const tmpState = Object.assign({}, gameState);
-      return Object.assign({}, tmpState, {scores});
+      return Object.assign({}, tmpState, {scores: state.scores, inviteCode: action.code});
     case 'REWARD_TALKER_POINTS':
       const talkers = U.addTalkerPoints(action.points, state.talkers, state.letters);
       player        = state.talkers.filter(U.isPlayer(state.player))[0];
@@ -80,8 +81,10 @@ const game = (state = gameState, action) => {
       return Object.assign({}, state, {guesser: action.guesser});
     case 'SET_SCORE':
       return Object.assign({}, state, {scores: action.scores});
+    case 'START_TALKING':
+      return Object.assign({}, state, {isStarted: true, inviteCode: action.code});
     case 'START_GAME':
-      return Object.assign({}, state, {isStarted: true});
+      return Object.assign({}, state, {isStarted: true, inviteCode: action.code});
     case 'INVITE_TO_GAME':
       return Object.assign({}, state, {inviteCode: action.inviteCode});
     case 'ADD_TALKER':

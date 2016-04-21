@@ -9,7 +9,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    startGame: () => dispatch({type: 'START_GAME'})
+    startGame: (code) => dispatch({type: 'START_GAME', code})
   };
 };
 

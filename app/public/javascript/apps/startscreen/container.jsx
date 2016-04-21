@@ -9,7 +9,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    inviteToGame: () => dispatch({type: 'INVITE_TO_GAME'}),
+    inviteToGame: () => {
+     const code = Math.floor(Math.random() * 1000);
+     dispatch({type: 'INVITE_TO_GAME', code}) 
+    },
     joinGame: () => dispatch({type: 'JOIN_GAME'})
   };
 };

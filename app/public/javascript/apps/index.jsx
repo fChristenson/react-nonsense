@@ -17,16 +17,16 @@ const App = props => <div className='content'>{props.children}</div>;
 
 const Routes = <Route path="/" component={App}>
 <IndexRoute component={Startscreen}/>
-<Route path="incorrect" component={Incorrect}/>
-<Route path="correct" component={Correct}/>
+<Route path="incorrect/:code" component={Incorrect}/>
+<Route path="correct/:code" component={Correct}/>
 <Route path="invite" component={Invite}/>
 <Route path="join" component={Join}/>
-<Route path="lobby" component={Lobby}/>
-<Route path="talker" component={Talker}>
+<Route path="lobby/:code" component={Lobby}/>
+<Route path="talker/:code" component={Talker}>
   <Route path="result" component={TalkerResult}/>
 </Route>
-<Route path="guesser" component={Guesser}/>
-<Route path="scoreboard" component={Scoreboard}/>
+<Route path="guesser/:code" component={Guesser}/>
+<Route path="scoreboard/:code" component={Scoreboard}/>
 </Route>;
 
 export default Routes;

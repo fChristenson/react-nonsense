@@ -11,13 +11,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    lobby: (talkers) => {
-      const id           = Math.random();
-      const playerNumber = talkers.length + 2;
-      const talker       = {id, name: 'P' + playerNumber, score: 0};
-      dispatch({type: 'LOBBY', talker})
+    lobby: (code) => {
+      dispatch({type: 'LOBBY', code});
     },
-    setCode: (code) => dispatch({type: 'SET_INPUT_CODE', code: code})
+    setCode: (code) => dispatch({type: 'SET_INPUT_CODE', code})
   };
 };
 

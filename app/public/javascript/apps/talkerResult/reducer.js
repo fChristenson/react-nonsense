@@ -9,7 +9,7 @@ const resultState = {
 export default (state = resultState, action) => {
   switch(action.type) {
     case 'GUESS_WAS_MADE':
-      browserHistory.push('/talker/result');
+      browserHistory.push('/talker/' + action.code + '/result');
       return Object.assign({}, state, {selectedImage: action.selectedImage});
     default:
       return state;

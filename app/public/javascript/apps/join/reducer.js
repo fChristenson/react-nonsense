@@ -7,7 +7,7 @@ export default (state = {}, action) => {
     case 'SET_INPUT_CODE':
       return Object.assign({}, state, {code: action.code});
     case 'LOBBY':
-      browserHistory.push('/lobby');
+      browserHistory.push('/lobby/' + action.code);
       return state;
     default:
       return state;

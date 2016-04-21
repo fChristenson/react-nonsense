@@ -3,7 +3,7 @@
 import React  from 'react';
 
 const onClick = (letter, props) => {
-  return () => props.onClick(props.player, letter)
+  return () => props.onClick(props.player, letter, props.inviteCode)
 };
 
 export default (props) => {

@@ -6,18 +6,19 @@ import { connect } from 'react-redux';
 const mapStateToProps = state => {
   return {
     player: state.game.player,
-    round: state.game.round
+    round: state.game.round,
+    code: state.game.inviteCode
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    scoreboard: (round) => {
+    scoreboard: (round, code) => {
       if(round >= 3) {
-        dispatch({type: 'SCOREBOARD'});
+        dispatch({type: 'SCOREBOARD', code});
       }
       else {
-        dispatch({type: 'GUESSER_NEXT_ROUND'});
+        dispatch({type: 'GUESSER_NEXT_ROUND', code});
       }
     }
   };

@@ -5,7 +5,7 @@ import Avatar from '../../components/avatar/index.jsx';
 import Button from '../../components/button/index.jsx';
 
 const onClick = (props) => {
-  return () => props.scoreboard(props.round);
+  return () => props.scoreboard(props.round, props.code);
 };
 
 export default (props) => {

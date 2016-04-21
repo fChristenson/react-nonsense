@@ -8,7 +8,11 @@ import TalkInput   from '../../components/talkInput/index.jsx';
 export default (props) => {
    const panel = <div>
     <TalkInput letters={props.letters}/>
-    <LetterTable onClick={props.addLetter} player={props.player} letters={props.randomLetters}/>
+    <LetterTable 
+    onClick={props.addLetter} 
+    player={props.player} 
+    inviteCode={props.inviteCode} 
+    letters={props.randomLetters}/>
   </div>;
   return (<div className="talker">
       <Avatar player={props.player.name} score={props.player.score} color={props.player.color}/>

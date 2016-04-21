@@ -7,15 +7,16 @@ const mapStateToProps = state => {
   return {
     images: state.game.images,
     letters: state.game.letters,
-    player: state.game.player
+    player: state.game.player,
+    code: state.game.inviteCode
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    rewardPoints: () => dispatch({type: 'REWARD_GUESSER_POINTS', points: 10}),
-    incorrectChoice: (selectedImage) => dispatch({type: 'INCORRECT_CHOICE', selectedImage}),
-    correctChoice: (selectedImage) => dispatch({type: 'CORRECT_CHOICE', selectedImage })
+    rewardPoints: (code) => dispatch({type: 'REWARD_GUESSER_POINTS', points: 10, code}),
+    incorrectChoice: (selectedImage, code) => dispatch({type: 'INCORRECT_CHOICE', selectedImage, code}),
+    correctChoice: (selectedImage, code) => dispatch({type: 'CORRECT_CHOICE', selectedImage, code})
   };
 };
 

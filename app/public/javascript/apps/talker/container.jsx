@@ -8,14 +8,16 @@ const mapStateToProps = state => {
     player: state.game.player,
     image: state.game.correctImage,
     letters: state.game.letters,
-    randomLetters: state.talker.randomLetters
+    randomLetters: state.talker.randomLetters,
+    inviteCode: state.game.inviteCode
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addLetter: (player, letter) => dispatch({
-      type: 'ADD_LETTER', 
+    addLetter: (player, letter, code) => dispatch({
+      type: 'ADD_LETTER',
+      code,
       letter: {
         id: Math.random(),
         player,
