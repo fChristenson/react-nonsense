@@ -96,7 +96,7 @@ describe('util tests', () => {
   describe('randomHexColor', () => {
     it('should return a css hex color', () => {
       const result = util.randomHexColor();
-      assert.ok(/^#[0-9A-Fa-f]{6}/.test(result));
+      assert.ok(/^#[0-9A-Fa-f]{3,6}/.test(result));
     });
   });
 });
