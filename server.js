@@ -1,8 +1,8 @@
 'use strict';
 
-var server = require('./app');
+import server from './app';
 
-server.start(function (err) {
+server.start((err) => {
   if(err) throw err;
   console.log('Running at: ', server.info.uri);
 });

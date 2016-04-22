@@ -4,7 +4,8 @@
   "description": "A guessing game where one player tries to figure out what the other players have on their screen",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --recursive app/**/__test__/*.js",
+    "test": "babel-node node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- --recursive 'app/**/__test__/*.js'",
+    "test-features": "babel-node --presets \"es2015,react\" node_modules/.bin/cucumber-js",
     "watch": "nodemon -e scss,js,jsx --ignore app/public/bundle.js --exec npm run deploy",
     "build": "webpack",
     "start": "babel-node --presets \"es2015,react\" server.js",
@@ -30,7 +31,7 @@
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
     "cucumber": "^0.9.5",
-    "istanbul": "^0.4.3",
+    "istanbul": "^1.0.0-alpha",
     "mocha": "^2.4.5",
     "nodemon": "^1.9.1",
     "postcss-loader": "^0.8.1",
@@ -41,6 +42,8 @@
   },
   "dependencies": {
     "babel-cli": "^6.5.1",
+    "good": "^6.6.3",
+    "good-console": "^5.3.2",
     "hapi": "^13.0.0",
     "inert": "^3.2.0",
     "joi": "^8.0.4",

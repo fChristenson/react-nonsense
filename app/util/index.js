@@ -65,4 +65,4 @@ const addTalkerPoints = R.curry((points, talkers, letters) => {
 module.exports.addTalkerPoints = addTalkerPoints;
 // Player {}->{}->Boolean
 const isPlayer = R.curry((player, obj) => player.id === obj.id)
-  module.exports.isPlayer = isPlayer;
+module.exports.isPlayer = isPlayer;

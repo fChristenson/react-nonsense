@@ -4,3 +4,4 @@ dist/
 bundle.js
 *.log
 .DS_store
+coverage/
