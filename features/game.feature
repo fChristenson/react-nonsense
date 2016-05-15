@@ -12,3 +12,5 @@ Feature:
     When I join the game
     Then I should be added to the game
 
+  Scenario: This is a example feature scenarion
+    Given that there is a precondition
