@@ -127,11 +127,7 @@ server.register([vision, inert, {
       const state  = server.app.games[code].store.getState();
       const scores = state.game.talkers
         .concat([state.game.guesser])
-        .sort((p1, p2) => {
-          const p1Num = parseInt(p1 && p1.name ? p1.name.substring(1) : 0);
-          const p2Num = parseInt(p2 && p2.name ? p2.name.substring(1) : 0);
-          return p1Num - p2Num;
-        });
+        .sort(U.sortPlayers);
       reply({scores});
     }
   });

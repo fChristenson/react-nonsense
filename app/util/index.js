@@ -1,6 +1,12 @@
 'use strict';
 
 import R from 'ramda';
+const sortPlayers = (p1, p2) => {
+  const p1Num = parseInt(p1 && p1.name ? p1.name.substring(1) : 0);
+  const p2Num = parseInt(p2 && p2.name ? p2.name.substring(1) : 0);
+  return p1Num - p2Num;
+};
+module.exports.sortPlayers = sortPlayers;
 //_->String []
 const randomLetters = () => {
   const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -65,4 +71,4 @@ const addTalkerPoints = R.curry((points, talkers, letters) => {
 module.exports.addTalkerPoints = addTalkerPoints;
 // Player {}->{}->Boolean
 const isPlayer = R.curry((player, obj) => player.id === obj.id)
-module.exports.isPlayer = isPlayer;
+  module.exports.isPlayer = isPlayer;
