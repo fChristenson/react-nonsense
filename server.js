@@ -3,6 +3,6 @@
 import server from './app';
 
 server.start((err) => {
-  if(err) throw err;
-  console.log('Running at: ', server.info.uri);
+    if(err) throw err;
+    console.log('Running at: ', server.info.uri);
 });

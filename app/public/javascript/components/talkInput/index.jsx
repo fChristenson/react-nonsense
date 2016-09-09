@@ -7,6 +7,7 @@ export default (props) => {
     const style = {color: letterObj.player.color};
     return <span key={index} style={style}>{letterObj.letter}</span>;
   });
+
   return (
       <div className="talkinput">
       {letters}

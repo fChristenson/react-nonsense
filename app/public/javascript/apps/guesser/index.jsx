@@ -17,6 +17,7 @@ const onClick = (image, props, fn) => () => fn(image, props.code)
         <img className="guesser__image" src={image.src}/>
         </button>;
     });
+
     return (<div className="guesser">
         <Avatar player={props.player.name} color={props.player.color} score={props.player.score}/>
         <h1>

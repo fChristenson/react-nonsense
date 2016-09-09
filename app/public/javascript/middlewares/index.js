@@ -1,78 +1,88 @@
 'use strict';
 
 import agent    from 'superagent';
-import reducers from '../reducers';
 
 const hasLetter = (letters, id) => {
-  return letters.filter(obj => obj.id === id).length > 0;
+    return letters.filter(obj => obj.id === id).length > 0;
 };
 
 export default socket => store => next => action => {
-  console.log('action sent', store.getState(), action);
-  switch(action.type) {
+    switch(action.type) {
+    
     case 'INVITE_TO_GAME':
-      return agent.post('/invite')
-        .send({code: action.code})
-        .then(res => {
-          next(action); 
-        });
+        return agent.post('/invite')
+          .send({code: action.code})
+          .then(() => {
+              next(action); 
+          });
+    
     case 'GUESSER_NEXT_ROUND':
-      socket.emit('GUESSER_NEXT_ROUND', action);
-      return next(action);
+        socket.emit('GUESSER_NEXT_ROUND', action);
+        return next(action);
+    
     case 'END_GAME':
-      socket.emit('END_GAME', {type: 'END_GAME', code: action.code});
-      return next(action);
+        socket.emit('END_GAME', {type: 'END_GAME', code: action.code});
+        return next(action);
+    
     case 'REWARD_GUESSER_POINTS':
-      socket.emit('REWARD_GUESSER_POINTS', action);
-      return next(action);
+        socket.emit('REWARD_GUESSER_POINTS', action);
+        return next(action);
+    
     case 'CORRECT_CHOICE':
-      socket.emit('GUESS_WAS_MADE', {type: 'GUESS_WAS_MADE', guessWasCorrect: true, selectedImage: action.selectedImage, code: action.code});
-      return next(action);
+        socket.emit('GUESS_WAS_MADE', {type: 'GUESS_WAS_MADE', guessWasCorrect: true, selectedImage: action.selectedImage, code: action.code});
+        return next(action);
+    
     case 'INCORRECT_CHOICE':
-      socket.emit('GUESS_WAS_MADE', {type: 'GUESS_WAS_MADE', guessWasCorrect: false, selectedImage: action.selectedImage, code: action.code});
-      return next(action);
+        socket.emit('GUESS_WAS_MADE', {type: 'GUESS_WAS_MADE', guessWasCorrect: false, selectedImage: action.selectedImage, code: action.code});
+        return next(action);
+    
     case 'REMOTE_SCOREBOARD':
-      return agent.get('/score/' + action.code)
-        .then(res => {
-          const { scores } = res.body;
-          store.dispatch({type: 'SET_SCORE', scores, code: action.code});
-          return next(action);
-        });
+        return agent.get('/score/' + action.code)
+          .then(res => {
+              const { scores } = res.body;
+              store.dispatch({type: 'SET_SCORE', scores, code: action.code});
+              return next(action);
+          });
+    
     case 'SCOREBOARD':
-      return agent.get('/score/' + action.code)
-        .then(res => {
-          const { scores } = res.body;
-          store.dispatch({type: 'SET_SCORE', scores, code: action.code});
-          socket.emit('SCOREBOARD', action);
-          return next(action);
-        });
+        return agent.get('/score/' + action.code)
+          .then(res => {
+              const { scores } = res.body;
+              store.dispatch({type: 'SET_SCORE', scores, code: action.code});
+              socket.emit('SCOREBOARD', action);
+              return next(action);
+          });
+    
     case 'LOBBY':
-      return agent.post('/talker/' + action.code)
-        .then(res => {
-          const { talker } = res.body;
-          store.dispatch({type: 'SET_PLAYER', player: talker});
-          store.dispatch({type: 'ADD_TALKER', talker});
-          const actionToSend = Object.assign({}, action, {type: 'JOIN_GAME', talker});
-          socket.emit('JOIN_GAME', actionToSend);
-          return next(action);
-        });
+        return agent.post('/talker/' + action.code)
+          .then(res => {
+              const { talker } = res.body;
+              store.dispatch({type: 'SET_PLAYER', player: talker});
+              store.dispatch({type: 'ADD_TALKER', talker});
+              const actionToSend = Object.assign({}, action, {type: 'JOIN_GAME', talker});
+              socket.emit('JOIN_GAME', actionToSend);
+              return next(action);
+          });
+    
     case 'START_GAME':
-      return agent.post('/guesser/' + action.code)
-        .then(res => {
-          const { guesser } = res.body;
-          store.dispatch({type: 'SET_PLAYER', player: guesser});
-          store.dispatch({type: 'SET_GUESSER', guesser});
-          action.guesser = guesser;
-          socket.emit('START_GAME', action);
-          return next(action);
-        });
+        return agent.post('/guesser/' + action.code)
+          .then(res => {
+              const { guesser } = res.body;
+              store.dispatch({type: 'SET_PLAYER', player: guesser});
+              store.dispatch({type: 'SET_GUESSER', guesser});
+              action.guesser = guesser;
+              socket.emit('START_GAME', action);
+              return next(action);
+          });
+    
     case 'ADD_LETTER':
-      if (!hasLetter(store.getState().game.letters, action.letter.id)) {
-        socket.emit('ADD_LETTER', action); 
-      }
-      return next(action);
+        if (!hasLetter(store.getState().game.letters, action.letter.id)) {
+            socket.emit('ADD_LETTER', action); 
+        }
+        return next(action);
+    
     default:
-      return next(action);
-  }
+        return next(action);
+    }
 };
 

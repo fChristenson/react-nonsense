@@ -23,80 +23,80 @@ const initState = store.getState();
 
 // hapi server
 const server = new Hapi.Server({
-  connections: {
-    routes: {
-      files: {
-        relativeTo: path.join(__dirname, 'public')
-      }
+    connections: {
+        routes: {
+            files: {
+                relativeTo: path.join(__dirname, 'public')
+            }
+        }
     }
-  }
 });
 
 server.app.games = {};
 server.connection({port: 3000});
 
 server.register([vision, inert, {
-  register: good,
-  options: {
-    reporters: [
-    {
-      reporter: goodConsole,
-      events: {log: '*', response: '*'}
-    }]
-  }
+    register: good,
+    options: {
+        reporters: [
+            {
+                reporter: goodConsole,
+                events: {log: '*', response: '*'}
+            }]
+    }
 }], (err) => {
-  if(err) throw err;  
+if(err) throw err;  
 
-  server.views({
+server.views({
     engines: {
-      html: swig
+        html: swig
     },
     relativeTo: __dirname,
     path:       'views'
-  });
+});
 
-  server.route({
+server.route({
     method:  'GET',
     path:    '/{param*}',
     handler: {
-      directory: {
-        path: '.',
-        redirectToSlash: true,
-        index: true
-      }
+        directory: {
+            path: '.',
+            redirectToSlash: true,
+            index: true
+        }
     }
   });
 
   const reactRoutesHandler = (request, reply) => {
-    match({routes, location: request.url.path}, (err, redirectLocation, props) => {
-      if(err) throw err;
-      const html = renderToString(<Provider store={store}><RouterContext {...props}/></Provider>);
-      reply.view('index', {html: html, init: initState});
-    });
+      match({routes, location: request.url.path}, (err, redirectLocation, props) => {
+          if(err) throw err;
+          const html = renderToString(<Provider store={store}><RouterContext {...props}/></Provider>);
+          reply.view('index', {html: html, init: initState});
+      });
   };
 
   server.route({
-    method:  'GET',
-    path:    '/',
-    handler: reactRoutesHandler
+      method:  'GET',
+      path:    '/',
+      handler: reactRoutesHandler
   });
 
   server.route({
-    method: 'POST',
-    path: '/guesser/{code}',
-    handler: (request, reply) => {
-      const code    = parseInt(request.params.code);
-      const state   = server.app.games[code].store.getState();
-      const id      = Math.random();
-      const guesser = {
-        id,
-        name: 'P1',
-        score: 0,
-        color: U.randomHexColor()
-      };
-      store.dispatch({type: 'SET_GUESSER', guesser});
-      reply({state, guesser});
-    }
+      method: 'POST',
+      path: '/guesser/{code}',
+      handler: (request, reply) => {
+          const code    = parseInt(request.params.code);
+          const state   = server.app.games[code].store.getState();
+          const id      = Math.random();
+          const guesser = {
+              id,
+              name: 'P1',
+              score: 0,
+              color: U.randomHexColor()
+          };
+          store.dispatch({type: 'SET_GUESSER', guesser});
+          reply({state, guesser});
+      }
   });
 
   server.route({
@@ -215,15 +215,18 @@ server.register([vision, inert, {
       action.type = 'ADD_TALKER';
       server.app.games[action.code].store.dispatch(action);
     });
+
     socket.on('REWARD_GUESSER_POINTS', action => {
       server.log('debug', action);
       server.app.games[action.code].store.dispatch(action);
     });
+
     socket.on('SCOREBOARD', action => {
       server.log('debug', action);
       action.type = 'REMOTE_SCOREBOARD';
       socket.broadcast.to(action.code).emit('REMOTE_SCOREBOARD', action);
     });
+
     socket.on('GUESS_WAS_MADE', action => {
       server.log('debug', action);
       if (action.guessWasCorrect) {
@@ -233,6 +236,7 @@ server.register([vision, inert, {
       }
       socket.broadcast.to(action.code).emit('GUESS_WAS_MADE', action);
     });
+
     socket.on('GUESSER_NEXT_ROUND', action => {
       server.log('debug', action);
       server.app.games[action.code].store.dispatch({type: 'SHUFFLE_IMAGES'});
@@ -243,12 +247,14 @@ server.register([vision, inert, {
       action.type        = 'TALKER_NEXT_ROUND';
       socket.broadcast.to(action.code).emit('TALKER_NEXT_ROUND', action);
     });
+
     socket.on('END_GAME', action => {
       server.log('debug', action);
       action.type = 'REMOTE_END_GAME';
       server.app.games[action.code].store.dispatch(action);
       socket.broadcast.to(action.code).emit('REMOTE_END_GAME', action);
     });
+
     socket.on('START_GAME', action => {
       server.log('debug', action);
       action.type        = 'SET_GUESSER';
@@ -262,12 +268,14 @@ server.register([vision, inert, {
       socket.join(action.code);
       io.to(action.code).emit('SET_IMAGES', {type: 'SET_IMAGES', images, correctImage});
     });
+
     socket.on('ADD_LETTER', action => {
       server.log('debug', action);
       server.app.games[action.code].store.dispatch(action);
       action.type = 'REMOTE_ADD_LETTER';
       socket.broadcast.to(action.code).emit('REMOTE_ADD_LETTER', action);
     });
+    
   });
 });
 
